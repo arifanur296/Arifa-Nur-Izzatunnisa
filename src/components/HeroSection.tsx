@@ -10,7 +10,7 @@ export default function HeroSection() {
   };
 
   const socials = [
-    { icon: Github, label: 'Github' },
+    { icon: Github, label: 'Github', url: 'https://github.com/arifanur296' },
     { icon: Linkedin, label: 'Linkedin' },
     { icon: Youtube, label: 'Youtube' },
     { icon: Instagram, label: 'Instagram' }
@@ -30,7 +30,7 @@ export default function HeroSection() {
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/40 transition-all duration-500"></div>
               
               <img 
-                src="/path-to-your-photo.jpg" 
+                src="/arifa7.jpg" 
                 alt="Arifa Nur Izzatunnisa"
                 className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] rounded-full object-cover border-4 border-primary shadow-glow z-10"
               />
@@ -63,9 +63,15 @@ export default function HeroSection() {
 
             <div className="flex items-center justify-center lg:justify-start gap-6">
               {socials.map((social, index) => (
-                <a key={index} href="#" className="p-3 rounded-full glass hover:shadow-glow transition-all">
+                <motion.a 
+                key={index} 
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-full glass hover:shadow-glow transition-all">
+                
                   <social.icon className="h-5 w-5 text-foreground" />
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
