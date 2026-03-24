@@ -31,7 +31,7 @@ const Index = () => {
   const toggleTheme = () => setIsDark(!isDark);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-pink-100 text-foreground">
 
 <button
   className="hover-button"
