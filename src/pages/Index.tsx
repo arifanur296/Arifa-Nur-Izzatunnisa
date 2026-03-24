@@ -1,3 +1,4 @@
+import './Index.css';
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -31,7 +32,32 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+
+<button
+  className="hover-button"
+  style={{
+    position: "relative", // bisa juga 'absolute' jika mau menempel di atas
+    zIndex: 1000,         // pastikan tombol di atas Navbar
+  }}
+>
+  :D
+</button>
+
+<Navbar isDark={isDark} toggleTheme={toggleTheme} />
+
+<Navbar isDark={isDark} toggleTheme={toggleTheme} />
+
+    
+    
+    
+    
+    
+    
+    
       <Navbar isDark={isDark} toggleTheme={toggleTheme} />
+
+
+
       <HeroSection />
       <AboutSection />
       <SkillsSection />

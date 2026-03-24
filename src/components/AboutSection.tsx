@@ -1,3 +1,6 @@
+
+import { useTranslation } from 'react-i18next';
+
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Code2, Video, Coffee, Rocket, ChevronDown } from 'lucide-react';

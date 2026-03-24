@@ -1,0 +1,12 @@
+.hover-button {
+  background-color: rgba(255, 193, 218, 0.406); /* warna normal */
+  color: white;           /* warna teks */
+  padding: 10px 20px;     /* jarak di dalam tombol */
+  border: none;           /* hilangkan garis pinggir */
+  cursor: pointer;        /* cursor jadi tangan */
+  transition: 0.3s;       /* biar efek hover smooth */
+}
+
+.hover-button:hover {
+  background-color: rgba(148, 255, 164, 0.349); /* warna tombol saat cursor di atas */
+}

@@ -1,6 +1,4 @@
-import arifa11 from '@/assets/arifa11.jpg';
-import arifa9 from '@/assets/arifa9.webp';
-import arifa10 from '@/assets/arifa10.jpg';
+
 
 "use client";
 
@@ -8,35 +6,38 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink, Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
+import arifa11 from "@/assets/arifa11.jpg";
+import arifa10 from "@/assets/arifa10.jpg";
+import arifa9 from "@/assets/arifa9.webp";
 
 const projects = [
   {
     title: "E-Commerce Platform",
-    description:
-      "Platform e-commerce modern dengan fitur lengkap termasuk payment gateway, inventory management, dan analytics dashboard.",
+    descriptionKey: "project_ecommerce_description",
     tags: ["React", "Node.js", "PostgreSQL", "Stripe"],
-    image: arifa11, // ← gunakan file import,
+    image: arifa11,
     color: "from-blue-500/20 to-cyan-500/20",
     github: "#",
     demo: "#",
   },
   {
     title: "Learning Management System",
-    description:
-      "Platform pembelajaran online dengan video streaming, quiz interaktif, dan progress tracking.",
+    description: "Platform pembelajaran online dengan video streaming, quiz interaktif, dan progress tracking.",
     tags: ["Next.js", "TypeScript", "MongoDB", "WebRTC"],
-    image: arifa10, // ← gunakan file import,
+    image: arifa10,
     color: "from-purple-500/20 to-pink-500/20",
     github: "#",
     demo: "#",
+  
   },
- 
- 
+
   {
     title: "Video Editing Tutorial",
     description: "Seri tutorial video editing dengan 100+ episode dan 10k+ subscribers.",
     tags: ["Premiere Pro", "After Effects", "YouTube"],
-    image: arifa9, // ← ini GIF,
+    image: arifa9,
     color: "from-red-500/20 to-orange-500/20",
     isContent: true,
     youtube: "#",
@@ -44,7 +45,8 @@ const projects = [
   
 ];
 
-export default function ProjectsCarousel() {
+export default function ProjectsSection() {
+  const { t } = useTranslation(); // ✅ HARUS DI SINI, di dalam function component
   const [projectIndex, setProjectIndex] = useState(0);
 
   // Autoplay setiap 3 detik
@@ -55,20 +57,15 @@ export default function ProjectsCarousel() {
     return () => clearInterval(interval);
   }, []);
 
-  const prevSlide = () => {
-    setProjectIndex((prev) => (prev - 1 + projects.length) % projects.length);
-  };
-
-  const nextSlide = () => {
-    setProjectIndex((prev) => (prev + 1) % projects.length);
-  };
+  const prevSlide = () => setProjectIndex((prev) => (prev - 1 + projects.length) % projects.length);
+  const nextSlide = () => setProjectIndex((prev) => (prev + 1) % projects.length);
 
   const project = projects[projectIndex];
 
   return (
     <section id="projects" className="py-20 md:py-32 bg-muted/30">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="font-display text-3xl md:text-5xl font-bold mb-8">Projects & Karya</h2>
+        <h2 className="font-display text-3xl md:text-5xl font-bold mb-8">{t("projects")}</h2>
 
         <div className="relative max-w-3xl mx-auto">
           <AnimatePresence mode="wait">
@@ -86,14 +83,8 @@ export default function ProjectsCarousel() {
                 if (offset.x < -50) nextSlide();
               }}
             >
-              <div
-                className={`aspect-video rounded-xl mb-4 flex items-center justify-center bg-gradient-to-br ${project.color}`}
-              >
-                <img 
-  src={project.image} 
-  alt={project.title} 
-  className="w-full h-full object-cover rounded-xl"
-/>
+              <div className={`aspect-video rounded-xl mb-4 flex items-center justify-center bg-gradient-to-br ${project.color}`}>
+                <img src={project.image} alt={project.title} className="w-full h-full object-cover rounded-xl" />
               </div>
 
               <div className="space-y-3">
@@ -107,15 +98,12 @@ export default function ProjectsCarousel() {
                 </div>
 
                 <p className="text-sm text-muted-foreground line-clamp-2">
-                  {project.description}
+                  {project.descriptionKey ? t(project.descriptionKey) : project.description}
                 </p>
 
                 <div className="flex flex-wrap justify-center gap-2">
                   {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 text-xs rounded-md bg-secondary text-secondary-foreground"
-                    >
+                    <span key={tag} className="px-2 py-1 text-xs rounded-md bg-secondary text-secondary-foreground">
                       {tag}
                     </span>
                   ))}
@@ -152,28 +140,17 @@ export default function ProjectsCarousel() {
           </AnimatePresence>
 
           {/* Navigation */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full"
-          >
+          <button onClick={prevSlide} className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full">
             <ChevronLeft className="h-5 w-5" />
           </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full"
-          >
+          <button onClick={nextSlide} className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full">
             <ChevronRight className="h-5 w-5" />
           </button>
 
           {/* Dots */}
           <div className="absolute bottom-2 flex justify-center w-full gap-2">
             {projects.map((_, i) => (
-              <div
-                key={i}
-                className={`h-1 rounded-full transition-all ${
-                  i === projectIndex ? "w-4 bg-white" : "w-1 bg-white/50"
-                }`}
-              />
+              <div key={i} className={`h-1 rounded-full transition-all ${i === projectIndex ? "w-4 bg-white" : "w-1 bg-white/50"}`} />
             ))}
           </div>
         </div>

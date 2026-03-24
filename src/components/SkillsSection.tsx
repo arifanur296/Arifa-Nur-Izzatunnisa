@@ -1,3 +1,7 @@
+
+import { useTranslation } from 'react-i18next';
+
+
 import { motion } from 'framer-motion';
 
 // 1. Perbaikan Struktur Data agar logis dan tidak tertukar
